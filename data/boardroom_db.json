@@ -1,0 +1,152 @@
+{
+  "version": "2.5.0-ENTERPRISE",
+  "lastUpdated": "2026-09-10T09:28:49.695Z",
+  "ventures": [
+    {
+      "id": "venture-synthetix-01",
+      "config": {
+        "startupName": "Synthetix AI",
+        "pitchGoal": "Series Seed Institutional Consensus",
+        "fundingRequest": "₹50,00,000",
+        "equityOffer": "7.0%",
+        "productSummary": "Autonomous real-time multi-agent arbitration engine with sub-200ms voice barge-in and deterministic turn bidding.",
+        "targetCustomer": "FinTech, Healthcare, and High-Frequency Enterprise Boards",
+        "businessModel": "Tiered Enterprise SLA + Usage-based Compute Pass-Through",
+        "founder": {
+          "fullName": "Alex Vance",
+          "title": "Founder & CEO",
+          "firmName": "Synthetix Autonomous Corp",
+          "priorExits": "Exited NexaFlow ($14M to Datadog, 2023)",
+          "education": "M.S. Computer Systems, Stanford University",
+          "domainExperienceYears": 8,
+          "linkedinUrl": "linkedin.com/in/alex-vance-ai",
+          "githubUrl": "github.com/synthetix-labs",
+          "verifiedAccreditation": true
+        }
+      },
+      "founder": {
+        "fullName": "Alex Vance",
+        "title": "Founder & CEO",
+        "firmName": "Synthetix Autonomous Corp",
+        "priorExits": "Exited NexaFlow ($14M to Datadog, 2023)",
+        "education": "M.S. Computer Systems, Stanford University",
+        "domainExperienceYears": 8,
+        "linkedinUrl": "linkedin.com/in/alex-vance-ai",
+        "githubUrl": "github.com/synthetix-labs",
+        "verifiedAccreditation": true
+      },
+      "createdAt": "2026-09-10T00:00:00.000Z"
+    }
+  ],
+  "sessions": [],
+  "institutionalKnowledgeBase": [
+    {
+      "domain": "financial",
+      "patterns": [
+        {
+          "rule": "LTV to CAC Ratio & Payback Period Consistency",
+          "riskLevel": "CRITICAL",
+          "triggerKeywords": [
+            "cac",
+            "payback",
+            "ltv",
+            "customer acquisition",
+            "cost per lead",
+            "rupees",
+            "dollar"
+          ],
+          "benchmarkMetric": "Payback < 12 months, LTV/CAC > 3.5x",
+          "incisiveQuestions": [
+            "What is your net customer acquisition cost after amortizing direct sales salaries and model token consumption?",
+            "How does your payback timeline shift if enterprise procurement cycles drag past 90 days?",
+            "What is your gross margin profile once dedicated edge inference compute is factored in?"
+          ]
+        },
+        {
+          "rule": "Burn Velocity vs. Runway Under Stress",
+          "riskLevel": "HIGH",
+          "triggerKeywords": [
+            "burn",
+            "runway",
+            "hiring",
+            "capital",
+            "months",
+            "payroll"
+          ],
+          "benchmarkMetric": "Minimum 18 months runway at target post-money valuation",
+          "incisiveQuestions": [
+            "How many months of runway does this capital allocation provide under zero enterprise renewal assumptions?",
+            "What is your monthly net burn rate including hosting overhead and model training runs?"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "tech",
+      "patterns": [
+        {
+          "rule": "Inference SLA & Edge Latency Hard Boundaries",
+          "riskLevel": "CRITICAL",
+          "triggerKeywords": [
+            "latency",
+            "p99",
+            "model",
+            "cloud",
+            "inference",
+            "tokens",
+            "api",
+            "ms",
+            "wrapper"
+          ],
+          "benchmarkMetric": "P99 voice turn-around < 300ms, P50 < 150ms",
+          "incisiveQuestions": [
+            "What is your P99 round-trip latency when upstream foundation model inference degrades?",
+            "Are you running self-hosted quantized checkpoints on bare-metal or proxying raw API tokens?",
+            "What is your exact mitigation for token rate-limit saturation under concurrent multi-user load?"
+          ]
+        },
+        {
+          "rule": "Architectural Defensibility & Moat Integrity",
+          "riskLevel": "HIGH",
+          "triggerKeywords": [
+            "wrapper",
+            "custom model",
+            "fine tune",
+            "weights",
+            "architecture",
+            "patent"
+          ],
+          "benchmarkMetric": "Proprietary arbitration heuristic + domain fine-tuning",
+          "incisiveQuestions": [
+            "Why can a foundation model provider not deploy this multi-agent arbitration heuristic as a default feature in their SDK?",
+            "Where is your proprietary data flywheel located, and who owns the customer interaction embeddings?"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "market",
+      "patterns": [
+        {
+          "rule": "Incumbent Defense & Distribution Velocity",
+          "riskLevel": "HIGH",
+          "triggerKeywords": [
+            "tam",
+            "market",
+            "scale",
+            "sales",
+            "gtm",
+            "competitor",
+            "incumbent",
+            "big tech"
+          ],
+          "benchmarkMetric": "ACV > $25k or viral bottom-up developer motion",
+          "incisiveQuestions": [
+            "What is your proprietary wedge against Microsoft, Google, and Salesforce entering this boardroom decision market?",
+            "Walk this committee through your first 10 closed-won enterprise contracts and their expansion velocity."
+          ]
+        }
+      ]
+    }
+  ]
+}

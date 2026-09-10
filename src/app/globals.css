@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+:root {
+  --bg-app: #030408;
+  --bg-card: #080b12;
+  --bg-subtle: #0e131f;
+  --bg-elevated: #141b2c;
+  --border-app: #182236;
+  --border-strong: #2a3a5a;
+  --text-app: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent-cyan: #10b981;
+  --accent-blue: #38bdf8;
+  --glow-cyan: rgba(16, 185, 129, 0.4);
+  --glow-blue: rgba(56, 189, 248, 0.35);
+  --grid-pattern: rgba(56, 189, 248, 0.04);
+}
+
+html.dark {
+  --bg-app: #020306;
+  --bg-card: #060910;
+  --bg-subtle: #0b101c;
+  --bg-elevated: #111828;
+  --border-app: #162033;
+  --border-strong: #243452;
+  --text-app: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent-cyan: #10b981;
+  --accent-blue: #38bdf8;
+  --glow-cyan: rgba(16, 185, 129, 0.5);
+  --glow-blue: rgba(56, 189, 248, 0.4);
+  --grid-pattern: rgba(56, 189, 248, 0.04);
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-app);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+    linear-gradient(to right, var(--grid-pattern) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-pattern) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Custom crisp scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #192338;
+}
+
+/* Tabular numbers */
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+/* Radar rotation */
+@keyframes radar-scan {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar {
+  animation: radar-scan 6s linear infinite;
+}
+
+/* Audio wave pulse bars */
+@keyframes wave-bar {
+  0%, 100% {
+    height: 4px;
+    opacity: 0.4;
+  }
+  50% {
+    height: 32px;
+    opacity: 1;
+  }
+}
+
+.animate-wave-1 { animation: wave-bar 0.9s ease-in-out infinite 0.1s; }
+.animate-wave-2 { animation: wave-bar 1.1s ease-in-out infinite 0.25s; }
+.animate-wave-3 { animation: wave-bar 0.8s ease-in-out infinite 0.4s; }
+.animate-wave-4 { animation: wave-bar 1.3s ease-in-out infinite 0.15s; }
+.animate-wave-5 { animation: wave-bar 1.0s ease-in-out infinite 0.35s; }
+.animate-wave-6 { animation: wave-bar 1.2s ease-in-out infinite 0.2s; }
+.animate-wave-7 { animation: wave-bar 0.7s ease-in-out infinite 0.45s; }
+.animate-wave-8 { animation: wave-bar 1.15s ease-in-out infinite 0.3s; }
+.animate-wave-9 { animation: wave-bar 0.85s ease-in-out infinite 0.5s; }
+.animate-wave-10 { animation: wave-bar 1.25s ease-in-out infinite 0.1s; }
+.animate-wave-11 { animation: wave-bar 0.95s ease-in-out infinite 0.4s; }
+.animate-wave-12 { animation: wave-bar 1.05s ease-in-out infinite 0.2s; }
+
+/* Subtle speaking glow */
+.speaking-glow {
+  box-shadow: 0 0 35px -5px var(--glow-cyan), inset 0 0 15px -3px var(--glow-cyan);
+}
+
+/* Glass panel */
+.glass-panel {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Pulse beacon ring */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s infinite ease-in-out;
+}
+
+/* Scanline and live frequency sweep */
+@keyframes frequency-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scan {
+  animation: frequency-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Glow border shimmer */
+@keyframes border-shimmer {
+  0%, 100% {
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    border-color: rgba(16, 185, 129, 0.7);
+  }
+}
+
+.shimmer-active {
+  animation: border-shimmer 2s ease-in-out infinite;
+}
+
+/* GTA 5 Weapon Wheel Expansion & Realistic Weapon Wheel Arc */
+@keyframes weapon-wheel-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(-25deg);
+    filter: blur(8px);
+  }
+  60% {
+    transform: scale(1.05) rotate(3deg);
+    filter: blur(0px);
+  }
+  85% {
+    transform: scale(0.98) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.animate-weapon-wheel {
+  animation: weapon-wheel-pop 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Reticle & Sci-Fi HUD rotations */
+@keyframes hud-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hud-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: hud-spin-slow 24s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: hud-spin-reverse 32s linear infinite;
+}
+
+/* Neon Pulse Breathing for Sector Selection */
+@keyframes neon-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.8), inset 0 0 25px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.animate-neon-pulse {
+  animation: neon-glow-pulse 2s ease-in-out infinite;
+}
+
+/* Laser Scanline Beam */
+@keyframes laser-sweep {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+.animate-laser-sweep {
+  animation: laser-sweep 3.5s ease-in-out infinite;
+}
+
+/* Floating micro-particle motion */
+@keyframes float-ambient {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-4px) translateX(3px);
+  }
+  50% {
+    transform: translateY(-8px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-3px) translateX(-4px);
+  }
+}
+
+.animate-float {
+  animation: float-ambient 6s ease-in-out infinite;
+}
+
+/* Audio Visualizer Real-Time Equalizer Pulse */
+@keyframes eq-dance {
+  0%, 100% {
+    height: 12%;
+  }
+  30% {
+    height: 90%;
+  }
+  60% {
+    height: 45%;
+  }
+  80% {
+    height: 75%;
+  }
+}
+
+.animate-eq-1 { animation: eq-dance 0.75s ease-in-out infinite 0.05s; }
+.animate-eq-2 { animation: eq-dance 0.9s ease-in-out infinite 0.2s; }
+.animate-eq-3 { animation: eq-dance 0.65s ease-in-out infinite 0.35s; }
+.animate-eq-4 { animation: eq-dance 1.1s ease-in-out infinite 0.1s; }
+.animate-eq-5 { animation: eq-dance 0.8s ease-in-out infinite 0.28s; }
+
+/* Dynamic Card Shimmer on Hover */
+.institutional-card {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.institutional-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.8), 0 0 20px -3px rgba(16, 185, 129, 0.15);
+}
+
+/* Agent Holographic Halo Glow */
+.halo-ceo {
+  box-shadow: 0 0 50px -5px rgba(16, 185, 129, 0.55), inset 0 0 24px -3px rgba(16, 185, 129, 0.35);
+  border-color: rgba(16, 185, 129, 0.85) !important;
+}
+
+.halo-cto {
+  box-shadow: 0 0 50px -5px rgba(56, 189, 248, 0.55), inset 0 0 24px -3px rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.85) !important;
+}
+
+.halo-cfo {
+  box-shadow: 0 0 50px -5px rgba(245, 158, 11, 0.55), inset 0 0 24px -3px rgba(245, 158, 11, 0.35);
+  border-color: rgba(245, 158, 11, 0.85) !important;
+}
+
