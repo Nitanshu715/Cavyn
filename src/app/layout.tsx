@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cavyn // Institutional AI Boardroom",
   description: "Voice-Native Multi-Agent Arbitration Engine",
+  icons: {
+    icon: "/Cavyn_Logo_noname.png",
+    shortcut: "/Cavyn_Logo_noname.png",
+    apple: "/Cavyn_Logo_noname.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

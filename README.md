@@ -2,14 +2,9 @@
 
 <div align="center">
 
-```
-  ██████╗ █████╗ ██╗   ██╗██╗   ██╗███╗   ██╗
- ██╔════╝██╔══██╗██║   ██║╚██╗ ██╔╝████╗  ██║
- ██║     ███████║██║   ██║ ╚████╔╝ ██╔██╗ ██║
- ██║     ██╔══██║╚██╗ ██╔╝  ╚██╔╝  ██║╚██╗██║
- ╚██████╗██║  ██║ ╚████╔╝    ██║   ██║ ╚████║
-  ╚═════╝╚═╝  ╚═╝  ╚═══╝     ╚═╝   ╚═╝  ╚═══╝
-```
+<p align="center">
+  <img src="public/Cavyn_Logo.png" alt="Cavyn Boardroom Logo" width="220" style="border-radius: 28px;" />
+</p>
 
 **Next-Generation Multi-Agent Founder Coaching & Conversational Boardroom Simulator**
 

@@ -782,11 +782,11 @@ export default function CavynInstitutionalBoardroom() {
               }}
             >
               <Image
-                src="/Cavyn_Logo.png"
+                src="/Cavyn_Logo_noname.png"
                 alt="Cavyn Logo"
-                width={28}
-                height={28}
-                className="w-full h-full object-contain"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain rounded-md"
                 priority
               />
             </div>
