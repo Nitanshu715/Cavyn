@@ -965,6 +965,24 @@ export default function CavynInstitutionalBoardroom() {
         </div>
       </header>
 
+      {/* PROMINENT API KEY SETUP NOTICE (OPTIONAL / USER INPUT) */}
+      {!hasGeminiKey && (
+        <div className="bg-amber-500/10 border-b border-amber-500/20 px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-amber-300">
+          <div className="flex items-center gap-2">
+            <Key className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>
+              <strong>Note for Visitors:</strong> Running on simulated offline intelligence. Click <strong>Enter API Key</strong> to connect your own Google Gemini key for real-time live LLM deliberation.
+            </span>
+          </div>
+          <button
+            onClick={() => setShowKeyModal(true)}
+            className="px-3 py-1 rounded-md bg-amber-500 text-neutral-950 font-bold text-[11px] hover:bg-amber-400 transition cursor-pointer shrink-0 shadow-xs"
+          >
+            Enter API Key
+          </button>
+        </div>
+      )}
+
       {/* NOTIFICATION BANNER */}
       {exportNotice && (
         <div className="bg-emerald-500/10 border-b border-emerald-500/30 px-6 py-2 flex items-center justify-between text-xs font-mono text-emerald-600 dark:text-emerald-400">
