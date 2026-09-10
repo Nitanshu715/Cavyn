@@ -48,26 +48,26 @@ Instead of passive chatbots or stiff interrogations, Cavyn deploys **three auton
 
 ```mermaid
 flowchart TD
-    subgraph Client Experience
-        MIC[🎙️ Founder Microphone]
-        SPEECH_RECOG[Continuous Speech Recognition Engine]
-        VAD[Instant Interim Speech Detector]
-        AUDIO_OUT[🔊 Speaker / Headphone Stream]
-        UI[💻 Next.js 16 Dark-Glass Dashboard & Wheel]
+    subgraph Client_Experience["Client Experience"]
+        MIC["Founder Microphone"]
+        SPEECH_RECOG["Continuous Speech Recognition Engine"]
+        VAD["Instant Interim Speech Detector"]
+        AUDIO_OUT["Speaker and Headphone Stream"]
+        UI["Next.js 16 Dark Glass Dashboard"]
     end
 
-    subgraph Server Orchestration Layer
-        API[/api/boardroom]
-        ORCHESTRATOR[Boardroom Orchestrator]
-        ARBITER[Speaker Turn Arbiter & Priority Matrix]
-        EPOCH[Monotonic Epoch Manager]
-        CONTRADICTION[Contradiction & Claim Evaluator]
+    subgraph Server_Orchestration["Server Orchestration Layer"]
+        API["API Endpoint: /api/boardroom"]
+        ORCHESTRATOR["Boardroom Orchestrator"]
+        ARBITER["Speaker Turn Arbiter and Priority Matrix"]
+        EPOCH["Monotonic Epoch Manager"]
+        CONTRADICTION["Contradiction and Claim Evaluator"]
     end
 
-    subgraph Intelligence & Synthesis Engines
-        GEMINI[🧠 Google Gemini 2.5 Flash]
-        RIME[🗣️ Rime Neural Cloud TTS]
-        NATURAL_TTS[🗣️ Browser Natural Speech Synthesizer]
+    subgraph Intelligence_Engines["Intelligence and Synthesis Engines"]
+        GEMINI["Google Gemini 2.5 Flash"]
+        RIME["Rime Neural Cloud TTS"]
+        NATURAL_TTS["Browser Natural Speech Synthesizer"]
     end
 
     MIC -->|Continuous Stream| SPEECH_RECOG
@@ -85,7 +85,7 @@ flowchart TD
     GEMINI --> RIME
     RIME -->|Audio Buffer| API
     API -->|Playback Payload| AUDIO_OUT
-    AUDIO_OUT -.->|Offline / Fallback| NATURAL_TTS
+    AUDIO_OUT -.->|Offline or Fallback| NATURAL_TTS
 ```
 
 ---

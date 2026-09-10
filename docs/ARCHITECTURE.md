@@ -17,36 +17,36 @@ Cavyn is a voice-native multi-agent boardroom simulator and founder coaching env
 
 ```mermaid
 flowchart TD
-    subgraph Founder Experience
-        F_MIC[Founder Microphone / Audio Input]
-        F_UI[Next.js 16 Client & Wheel Interface]
-        F_EARS[Founder Speakers / Headphones]
+    subgraph Founder_Experience["Founder Experience"]
+        F_MIC["Founder Microphone Audio Input"]
+        F_UI["Next.js 16 Client and Wheel Interface"]
+        F_EARS["Founder Speakers and Headphones"]
     end
 
-    subgraph Browser Client Tier
-        STT[Web Speech Continuous STT Engine]
-        VAD[Instant Interim Speech Detector]
-        AUDIO_CTRL[Audio Engine & Web Speech Synthesizer]
-        STATE_STORE[React Boardroom State Store]
+    subgraph Browser_Client_Tier["Browser Client Tier"]
+        STT["Web Speech Continuous STT Engine"]
+        VAD["Instant Interim Speech Detector"]
+        AUDIO_CTRL["Audio Engine and Web Speech Synthesizer"]
+        STATE_STORE["React Boardroom State Store"]
     end
 
-    subgraph API Route & Orchestration
-        API_GATEWAY[/api/boardroom]
-        ORCHESTRATOR[Boardroom Orchestrator]
-        ARBITER[Speaker Turn Arbiter & Priority Matrix]
-        EPOCH_MGR[Monotonic Epoch Manager]
-        CONTRADICTION_DET[Contradiction & Claim Tracker]
+    subgraph API_Route_Orchestration["API Route and Orchestration"]
+        API_GATEWAY["API Endpoint: /api/boardroom"]
+        ORCHESTRATOR["Boardroom Orchestrator"]
+        ARBITER["Speaker Turn Arbiter and Priority Matrix"]
+        EPOCH_MGR["Monotonic Epoch Manager"]
+        CONTRADICTION_DET["Contradiction and Claim Tracker"]
     end
 
-    subgraph Intelligence Core
-        GEMINI_CLIENT[Google Gemini 2.5 Flash Client]
-        PERSONAS[Autonomous Mentor Personas Engine]
-        PEER_DEBATE[Autonomous Cross-Examination Engine]
+    subgraph Intelligence_Core["Intelligence Core"]
+        GEMINI_CLIENT["Google Gemini 2.5 Flash Client"]
+        PERSONAS["Autonomous Mentor Personas Engine"]
+        PEER_DEBATE["Autonomous Cross-Examination Engine"]
     end
 
-    subgraph Voice Synthesis Core
-        RIME_TTS[Rime TTS Cloud API - Coda / Mist v3]
-        FALLBACK_TTS[Browser Natural Voice Synthesizer]
+    subgraph Voice_Synthesis_Core["Voice Synthesis Core"]
+        RIME_TTS["Rime TTS Cloud API Coda Mist v3"]
+        FALLBACK_TTS["Browser Natural Voice Synthesizer"]
     end
 
     %% User Input Flow
