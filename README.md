@@ -3,7 +3,7 @@
 <div align="center">
 
 <p align="center">
-  <img src="Cavyn_Logo.png" alt="Cavyn Boardroom Logo" width="220" style="border-radius: 28px;" />
+  <img src="Cavyn_Logo.png" alt="Cavyn Boardroom Logo" width="320" />
 </p>
 
 # Real-Time Multi-Agent Voice Boardroom
