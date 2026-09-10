@@ -1093,32 +1093,36 @@ export default function CavynInstitutionalBoardroom() {
                 </linearGradient>
               </defs>
 
-              {/* 5 GTA 5 WEDGE WEDGES (72 DEGREE PIE SLICES) */}
+              {/* 5 GTA 5 WEDGE WEDGES (72 DEGREE PIE SLICES PERFECTLY PARTITIONING 360°) */}
               {[
-                { tab: 'CHAMBER', startAngle: -90 - 36, endAngle: -90 + 36, color: '#10b981' },
-                { tab: 'CLAIMS_DOSSIER', startAngle: -18, endAngle: 54, color: '#38bdf8' },
-                { tab: 'INVESTOR_PORTFOLIO', startAngle: 54, endAngle: 126, color: '#a855f7' },
-                { tab: 'ARBITRATION_ENGINE', startAngle: 126, endAngle: 198, color: '#f59e0b' },
-                { tab: 'ANALYTICS', startAngle: 198, endAngle: 270, color: '#f43f5e' },
+                { tab: 'CHAMBER', centerAngle: -90, color: '#10b981' },
+                { tab: 'CLAIMS_DOSSIER', centerAngle: -18, color: '#38bdf8' },
+                { tab: 'INVESTOR_PORTFOLIO', centerAngle: 54, color: '#a855f7' },
+                { tab: 'ARBITRATION_ENGINE', centerAngle: 126, color: '#f59e0b' },
+                { tab: 'ANALYTICS', centerAngle: 198, color: '#f43f5e' },
               ].map((wedge) => {
                 const isActive = activeTab === wedge.tab;
                 const isHovered = hoveredWheelSector === wedge.tab;
+                const halfArc = 35.2; // 70.4 deg total arc with 1.6 deg sleek gap between sectors
+
+                const startAngle = wedge.centerAngle - halfArc;
+                const endAngle = wedge.centerAngle + halfArc;
 
                 // Function to generate SVG arc slice path
                 const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
-                  const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+                  const angleInRadians = (angleInDegrees * Math.PI) / 180.0;
                   return {
                     x: centerX + radius * Math.cos(angleInRadians),
                     y: centerY + radius * Math.sin(angleInRadians),
                   };
                 };
 
-                const createSlice = (x: number, y: number, rInner: number, rOuter: number, startAngle: number, endAngle: number) => {
-                  const startOuter = polarToCartesian(x, y, rOuter, endAngle);
-                  const endOuter = polarToCartesian(x, y, rOuter, startAngle);
-                  const startInner = polarToCartesian(x, y, rInner, endAngle);
-                  const endInner = polarToCartesian(x, y, rInner, startAngle);
-                  const arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+                const createSlice = (x: number, y: number, rInner: number, rOuter: number, sAngle: number, eAngle: number) => {
+                  const startOuter = polarToCartesian(x, y, rOuter, eAngle);
+                  const endOuter = polarToCartesian(x, y, rOuter, sAngle);
+                  const startInner = polarToCartesian(x, y, rInner, eAngle);
+                  const endInner = polarToCartesian(x, y, rInner, sAngle);
+                  const arcSweep = eAngle - sAngle <= 180 ? '0' : '1';
                   return [
                     'M', startOuter.x, startOuter.y,
                     'A', rOuter, rOuter, 0, arcSweep, 0, endOuter.x, endOuter.y,
@@ -1130,7 +1134,7 @@ export default function CavynInstitutionalBoardroom() {
 
                 const outerRadius = isHovered ? 232 : isActive ? 226 : 220;
                 const innerRadius = 88;
-                const pathD = createSlice(240, 240, innerRadius, outerRadius, wedge.startAngle + 90, wedge.endAngle + 90);
+                const pathD = createSlice(240, 240, innerRadius, outerRadius, startAngle, endAngle);
 
                 return (
                   <path
@@ -1142,7 +1146,7 @@ export default function CavynInstitutionalBoardroom() {
                     }}
                     onMouseEnter={() => setHoveredWheelSector(wedge.tab as ActiveTab)}
                     onMouseLeave={() => setHoveredWheelSector(null)}
-                    className="cursor-pointer transition-all duration-200"
+                    className="cursor-pointer transition-all duration-300 ease-out"
                     fill={
                       isActive
                         ? `${wedge.color}35`
@@ -1158,135 +1162,118 @@ export default function CavynInstitutionalBoardroom() {
                         : 'rgba(51, 65, 85, 0.4)'
                     }
                     strokeWidth={isActive || isHovered ? 2.5 : 1.2}
+                    style={{
+                      filter: isActive || isHovered ? `drop-shadow(0 0 12px ${wedge.color}60)` : undefined,
+                    }}
                   />
                 );
               })}
             </svg>
 
-            {/* SECTOR 1: TOP (12 O'CLOCK) // CHAMBER */}
-            <button
-              onMouseEnter={() => setHoveredWheelSector('CHAMBER')}
-              onMouseLeave={() => setHoveredWheelSector(null)}
-              onClick={() => {
-                setActiveTab('CHAMBER');
-                setIsWeaponWheelOpen(false);
-              }}
-              className={`absolute top-5 flex flex-col items-center justify-center p-2 font-mono transition-all duration-200 cursor-pointer group z-30 ${
-                activeTab === 'CHAMBER'
-                  ? 'text-emerald-300 scale-110'
-                  : 'text-neutral-300 hover:text-emerald-400 hover:scale-105'
-              }`}
-            >
-              <div className={`p-2 rounded-xl border transition-all ${
-                activeTab === 'CHAMBER'
-                  ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-lg shadow-emerald-500/40'
-                  : 'bg-neutral-900/90 border-neutral-700/80 group-hover:border-emerald-500/60'
-              }`}>
-                <Layers className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-tight mt-1">01 // Chamber</span>
-              <span className="text-[8px] text-neutral-400">Live Roundtable</span>
-            </button>
+            {/* SECTOR BUTTONS: POSITIONED AT EXACT GEOMETRIC ANGLE CENTERS */}
+            {[
+              {
+                tab: 'CHAMBER' as ActiveTab,
+                angle: -90,
+                num: '01',
+                title: 'Chamber',
+                sub: 'Live Roundtable',
+                icon: Layers,
+                color: '#10b981',
+                activeClass: 'text-emerald-300 border-emerald-400 bg-emerald-500/20 shadow-emerald-500/40',
+                hoverClass: 'hover:text-emerald-400 group-hover:border-emerald-500/60'
+              },
+              {
+                tab: 'CLAIMS_DOSSIER' as ActiveTab,
+                angle: -18,
+                num: '02',
+                title: 'Claims',
+                sub: 'Dossier Audit',
+                icon: FileSpreadsheet,
+                color: '#38bdf8',
+                activeClass: 'text-sky-300 border-sky-400 bg-sky-500/20 shadow-sky-500/40',
+                hoverClass: 'hover:text-sky-400 group-hover:border-sky-500/60'
+              },
+              {
+                tab: 'INVESTOR_PORTFOLIO' as ActiveTab,
+                angle: 54,
+                num: '03',
+                title: 'Founder',
+                sub: 'DD & SAFE',
+                icon: User,
+                color: '#a855f7',
+                activeClass: 'text-purple-300 border-purple-400 bg-purple-500/20 shadow-purple-500/40',
+                hoverClass: 'hover:text-purple-400 group-hover:border-purple-500/60'
+              },
+              {
+                tab: 'ARBITRATION_ENGINE' as ActiveTab,
+                angle: 126,
+                num: '04',
+                title: 'Telemetry',
+                sub: 'SLA & Latency',
+                icon: Cpu,
+                color: '#f59e0b',
+                activeClass: 'text-amber-300 border-amber-400 bg-amber-500/20 shadow-amber-500/40',
+                hoverClass: 'hover:text-amber-400 group-hover:border-amber-500/60'
+              },
+              {
+                tab: 'ANALYTICS' as ActiveTab,
+                angle: 198,
+                num: '05',
+                title: 'Scoring',
+                sub: 'Matrix & Vote',
+                icon: BarChart3,
+                color: '#f43f5e',
+                activeClass: 'text-rose-300 border-rose-400 bg-rose-500/20 shadow-rose-500/40',
+                hoverClass: 'hover:text-rose-400 group-hover:border-rose-500/60'
+              },
+            ].map((sector) => {
+              const isActive = activeTab === sector.tab;
+              const isHovered = hoveredWheelSector === sector.tab;
+              const Icon = sector.icon;
 
-            {/* SECTOR 2: TOP RIGHT (2:30 O'CLOCK) // CLAIMS DOSSIER */}
-            <button
-              onMouseEnter={() => setHoveredWheelSector('CLAIMS_DOSSIER')}
-              onMouseLeave={() => setHoveredWheelSector(null)}
-              onClick={() => {
-                setActiveTab('CLAIMS_DOSSIER');
-                setIsWeaponWheelOpen(false);
-              }}
-              className={`absolute right-4 top-24 flex flex-col items-center justify-center p-2 font-mono transition-all duration-200 cursor-pointer group z-30 ${
-                activeTab === 'CLAIMS_DOSSIER'
-                  ? 'text-sky-300 scale-110'
-                  : 'text-neutral-300 hover:text-sky-400 hover:scale-105'
-              }`}
-            >
-              <div className={`p-2 rounded-xl border transition-all ${
-                activeTab === 'CLAIMS_DOSSIER'
-                  ? 'bg-sky-500/20 border-sky-400 text-sky-300 shadow-lg shadow-sky-500/40'
-                  : 'bg-neutral-900/90 border-neutral-700/80 group-hover:border-sky-500/60'
-              }`}>
-                <FileSpreadsheet className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-tight mt-1">02 // Claims</span>
-              <span className="text-[8px] text-neutral-400">Dossier Audit</span>
-            </button>
+              // Compute button center coordinates at radius 156px from center (240, 240)
+              const rad = (sector.angle * Math.PI) / 180;
+              const btnRadius = 156;
+              const left = 240 + btnRadius * Math.cos(rad);
+              const top = 240 + btnRadius * Math.sin(rad);
 
-            {/* SECTOR 3: BOTTOM RIGHT (4:45 O'CLOCK) // FOUNDER DD */}
-            <button
-              onMouseEnter={() => setHoveredWheelSector('INVESTOR_PORTFOLIO')}
-              onMouseLeave={() => setHoveredWheelSector(null)}
-              onClick={() => {
-                setActiveTab('INVESTOR_PORTFOLIO');
-                setIsWeaponWheelOpen(false);
-              }}
-              className={`absolute right-12 bottom-9 flex flex-col items-center justify-center p-2 font-mono transition-all duration-200 cursor-pointer group z-30 ${
-                activeTab === 'INVESTOR_PORTFOLIO'
-                  ? 'text-purple-300 scale-110'
-                  : 'text-neutral-300 hover:text-purple-400 hover:scale-105'
-              }`}
-            >
-              <div className={`p-2 rounded-xl border transition-all ${
-                activeTab === 'INVESTOR_PORTFOLIO'
-                  ? 'bg-purple-500/20 border-purple-400 text-purple-300 shadow-lg shadow-purple-500/40'
-                  : 'bg-neutral-900/90 border-neutral-700/80 group-hover:border-purple-500/60'
-              }`}>
-                <User className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-tight mt-1">03 // Founder</span>
-              <span className="text-[8px] text-neutral-400">DD & SAFE</span>
-            </button>
-
-            {/* SECTOR 4: BOTTOM LEFT (7:15 O'CLOCK) // TELEMETRY */}
-            <button
-              onMouseEnter={() => setHoveredWheelSector('ARBITRATION_ENGINE')}
-              onMouseLeave={() => setHoveredWheelSector(null)}
-              onClick={() => {
-                setActiveTab('ARBITRATION_ENGINE');
-                setIsWeaponWheelOpen(false);
-              }}
-              className={`absolute left-12 bottom-9 flex flex-col items-center justify-center p-2 font-mono transition-all duration-200 cursor-pointer group z-30 ${
-                activeTab === 'ARBITRATION_ENGINE'
-                  ? 'text-amber-300 scale-110'
-                  : 'text-neutral-300 hover:text-amber-400 hover:scale-105'
-              }`}
-            >
-              <div className={`p-2 rounded-xl border transition-all ${
-                activeTab === 'ARBITRATION_ENGINE'
-                  ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-lg shadow-amber-500/40'
-                  : 'bg-neutral-900/90 border-neutral-700/80 group-hover:border-amber-500/60'
-              }`}>
-                <Cpu className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-tight mt-1">04 // Telemetry</span>
-              <span className="text-[8px] text-neutral-400">SLA & Latency</span>
-            </button>
-
-            {/* SECTOR 5: TOP LEFT (9:30 O'CLOCK) // SCORING MATRIX */}
-            <button
-              onMouseEnter={() => setHoveredWheelSector('ANALYTICS')}
-              onMouseLeave={() => setHoveredWheelSector(null)}
-              onClick={() => {
-                setActiveTab('ANALYTICS');
-                setIsWeaponWheelOpen(false);
-              }}
-              className={`absolute left-4 top-24 flex flex-col items-center justify-center p-2 font-mono transition-all duration-200 cursor-pointer group z-30 ${
-                activeTab === 'ANALYTICS'
-                  ? 'text-rose-300 scale-110'
-                  : 'text-neutral-300 hover:text-rose-400 hover:scale-105'
-              }`}
-            >
-              <div className={`p-2 rounded-xl border transition-all ${
-                activeTab === 'ANALYTICS'
-                  ? 'bg-rose-500/20 border-rose-400 text-rose-300 shadow-lg shadow-rose-500/40'
-                  : 'bg-neutral-900/90 border-neutral-700/80 group-hover:border-rose-500/60'
-              }`}>
-                <BarChart3 className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-tight mt-1">05 // Scoring</span>
-              <span className="text-[8px] text-neutral-400">Matrix & Vote</span>
-            </button>
+              return (
+                <button
+                  key={sector.tab}
+                  onMouseEnter={() => setHoveredWheelSector(sector.tab)}
+                  onMouseLeave={() => setHoveredWheelSector(null)}
+                  onClick={() => {
+                    setActiveTab(sector.tab);
+                    setIsWeaponWheelOpen(false);
+                  }}
+                  style={{
+                    left: `${left}px`,
+                    top: `${top}px`,
+                    transform: `translate(-50%, -50%) ${isActive || isHovered ? 'scale(1.12)' : 'scale(1)'}`,
+                  }}
+                  className={`absolute flex flex-col items-center justify-center p-1.5 font-mono transition-all duration-300 cursor-pointer group z-30 ${
+                    isActive
+                      ? sector.activeClass
+                      : `text-neutral-300 ${sector.hoverClass}`
+                  }`}
+                >
+                  <div className={`p-2 rounded-xl border transition-all duration-300 ${
+                    isActive
+                      ? `${sector.activeClass} shadow-lg ring-2 ring-current/30`
+                      : 'bg-neutral-900/90 border-neutral-700/80 group-hover:scale-105'
+                  }`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-tight mt-1 whitespace-nowrap">
+                    {sector.num} // {sector.title}
+                  </span>
+                  <span className="text-[8px] text-neutral-400 whitespace-nowrap">
+                    {sector.sub}
+                  </span>
+                </button>
+              );
+            })}
 
             {/* CENTER WHEEL HUD & TELEMETRY CORE */}
             <div
