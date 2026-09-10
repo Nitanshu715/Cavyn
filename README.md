@@ -1,11 +1,12 @@
-# 💎 Cavyn: Real-Time Multi-Agent Voice Boardroom
+
 
 <div align="center">
 
 <p align="center">
-  <img src="public/Cavyn_Logo.png" alt="Cavyn Boardroom Logo" width="220" style="border-radius: 28px;" />
+  <img src="Cavyn_Logo.png" alt="Cavyn Boardroom Logo" width="220" style="border-radius: 28px;" />
 </p>
 
+# Real-Time Multi-Agent Voice Boardroom
 **Next-Generation Multi-Agent Founder Coaching & Conversational Boardroom Simulator**
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.3.4-black?logo=next.js)](https://nextjs.org/)
